@@ -31,7 +31,12 @@ async function getWeather() {
 
 function displayWeather(currentWeather, forecast) {
     document.getElementById('city-name').textContent = currentWeather.name;
-    document.getElementById('temperature').textContent = `Temperatur: ${currentWeather.main.temp}°C`;
+
+    // Round the current temperature
+    let currentTemperature = currentWeather.main.temp;
+    let roundedCurrentTemperature = Math.round(currentTemperature); // Rounds to the nearest integer
+
+    document.getElementById('temperature').textContent = `Temperatur: ${roundedCurrentTemperature}°C`;
     document.getElementById('description').textContent = currentWeather.weather[0].description;
 
     const forecastElement = document.getElementById('forecast');
@@ -41,13 +46,49 @@ function displayWeather(currentWeather, forecast) {
         const dayForecast = forecast.list[i];
         const dayElement = document.createElement('div');
         dayElement.classList.add('forecast-day');
+
+        const weatherIcon = getWeatherIcon(dayForecast.weather[0].icon);
+
+        // Round the forecast temperature
+        let forecastTemperature = dayForecast.main.temp;
+        let roundedForecastTemperature = Math.round(forecastTemperature); // Rounds to the nearest integer
+
         dayElement.innerHTML = `
             <p>${new Date(dayForecast.dt_txt).toLocaleDateString()}</p>
-            <p>Temp: ${dayForecast.main.temp}°C</p>
+            <img src="images/${weatherIcon}" alt="${dayForecast.weather[0].description}">
+            <p>Temp: ${roundedForecastTemperature}°C</p>
             <p>${dayForecast.weather[0].description}</p>
         `;
         forecastElement.appendChild(dayElement);
     }
 
     document.getElementById('weather-info').style.display = 'block';
+}
+
+function getWeatherIcon(iconCode) {
+    switch(iconCode) {
+        case '01d':
+        case '01n':
+            return 'clear.png';
+        case '02d':
+        case '02n':
+        case '03d':
+        case '03n':
+        case '04d':
+        case '04n':
+            return 'cloudy.png';
+        case '09d':
+        case '09n':
+        case '10d':
+        case '10n':
+            return 'rain.png';
+        case '11d':
+        case '11n':
+            return 'thunderstorm.png';
+        case '13d':
+        case '13n':
+            return 'snow.png';
+        default:
+            return 'default.png'; // Optional: Fallback icon
+    }
 }
