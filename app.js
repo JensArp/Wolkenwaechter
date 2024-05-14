@@ -2,6 +2,7 @@ const apiKey = 'cbbc4708df34fee8dbcc2e5accb3caf0'; // Replace with your OpenWeat
 
 document.addEventListener('DOMContentLoaded', () => {
     const cityInput = document.getElementById('city-input');
+    const searchButton = document.getElementById('search-button');
     
     // Add event listener for 'Enter' key
     cityInput.addEventListener('keypress', (event) => {
@@ -9,36 +10,43 @@ document.addEventListener('DOMContentLoaded', () => {
             getWeather();
         }
     });
+
+    // Add event listener for search button
+    searchButton.addEventListener('click', getWeather);
 });
 
 async function getWeather() {
     const city = document.getElementById('city-input').value;
     const weatherInfo = document.getElementById('weather-info');
+    const currentWeather = document.getElementById('current-weather');
+    const currentWeatherIcon = document.getElementById('current-weather-icon');
+    const currentTemperature = document.getElementById('current-temperature');
+    const currentLocation = document.getElementById('current-location');
+    
     weatherInfo.style.display = 'none';
+    currentWeather.style.display = 'none';
 
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=de`);
-        const currentWeather = await response.json();
+        const currentWeatherData = await response.json();
 
         const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}&lang=de`);
-        const forecast = await forecastResponse.json();
+        const forecastData = await forecastResponse.json();
 
-        displayWeather(currentWeather, forecast);
+        displayWeather(currentWeatherData, forecastData);
+
+        // Display current weather
+        const weatherIcon = getWeatherIcon(currentWeatherData.weather[0].icon);
+        currentWeatherIcon.src = `icons/${weatherIcon}`;
+        currentTemperature.textContent = `${Math.round(currentWeatherData.main.temp)}°C`;
+        currentLocation.textContent = currentWeatherData.name;
+        currentWeather.style.display = 'block';
     } catch (error) {
         alert('Stadt nicht gefunden!');
     }
 }
 
 function displayWeather(currentWeather, forecast) {
-    document.getElementById('city-name').textContent = currentWeather.name;
-
-    // Round the current temperature
-    let currentTemperature = currentWeather.main.temp;
-    let roundedCurrentTemperature = Math.round(currentTemperature); // Rounds to the nearest integer
-
-    document.getElementById('temperature').textContent = `Temperatur: ${roundedCurrentTemperature}°C`;
-    document.getElementById('description').textContent = currentWeather.weather[0].description;
-
     const forecastElement = document.getElementById('forecast');
     forecastElement.innerHTML = '';
 
@@ -49,14 +57,10 @@ function displayWeather(currentWeather, forecast) {
 
         const weatherIcon = getWeatherIcon(dayForecast.weather[0].icon);
 
-        // Round the forecast temperature
-        let forecastTemperature = dayForecast.main.temp;
-        let roundedForecastTemperature = Math.round(forecastTemperature); // Rounds to the nearest integer
-
         dayElement.innerHTML = `
             <p>${new Date(dayForecast.dt_txt).toLocaleDateString()}</p>
             <img src="images/${weatherIcon}" alt="${dayForecast.weather[0].description}">
-            <p>Temp: ${roundedForecastTemperature}°C</p>
+            <p>Temp: ${Math.round(dayForecast.main.temp)}°C</p>
             <p>${dayForecast.weather[0].description}</p>
         `;
         forecastElement.appendChild(dayElement);

@@ -21,11 +21,12 @@ body {
 .title {
     font-size: 2rem;
     color: transparent;
-    background: linear-gradient(90deg, #ff0000, #00ff00, #0000ff, #ff00ff);
+    background: linear-gradient(90deg, #232121, #a0a4a0dc, #7e7e87, #514e51);
     background-size: 400%;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: gradient 8s ease infinite;
+    animation: gradient 15s ease infinite;
+    margin-bottom: 20px;
 }
 
 @keyframes gradient {
@@ -34,44 +35,63 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.search {
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
 #city-input {
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: calc(100% - 120px);
+    border: 1px solid #ccccccb6;
+    border-radius: 50px;
+    width: calc(100% - 60px);
     margin-right: 10px;
+    background: rgba(255, 255, 255, 0.3); /* Transparenter Hintergrund */
+    outline: none;
 }
 
-button {
+#search-button {
+    background: #ccccccb6; */
+    border-radius: 50%;
     padding: 10px;
-    margin-top: 10px;
-    font-size: 1rem;
-    border: none;
-    background-color: #007BFF;
-    color: white;
-    border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-button:hover {
-    background-color: #0056b3;
+#search-button img {
+    width: 20px;
+    height: 20px;
+}
+
+.current-weather {
+    margin-top: 20px;
+    display: none; /* Initially hidden */
+    text-align: center;
+}
+
+.current-weather img {
+    width: 100px;
+    height: 100px;
+}
+
+.current-temperature {
+    font-size: 2rem;
+    margin: 5px 0;
+}
+
+.current-location {
+    font-size: 1.5rem;
+    margin: 5px 0;
 }
 
 .weather-info {
     margin-top: 20px;
-}
-
-.current-weather, .forecast {
-    margin-top: 10px;
-}
-
-.current-weather p, .forecast p {
-    margin: 5px 0;
+    display: none; /* Initially hidden */
 }
 
 .forecast {

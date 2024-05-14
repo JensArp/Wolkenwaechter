@@ -9,17 +9,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>Wetter App</h1>
-        <div class="search">
+        <h1 class="title">Wetter App</h1>
+        <div class="search-container">
             <input type="text" id="city-input" placeholder="Ort eintragen">
-            <button onclick="getWeather()">Zeige Wetter</button>
+            <button id="search-button"><img src="images/search-icon.png" alt="Search"></button>
+        </div>
+        <div id="current-weather" class="current-weather">
+            <img id="current-weather-icon" src="" alt="Weather Icon">
+            <p id="current-temperature"></p>
+            <p id="current-location"></p>
         </div>
         <div id="weather-info" class="weather-info">
-            <h2 id="city-name"></h2>
-            <div id="current-weather" class="current-weather">
-                <p id="temperature"></p>
-                <p id="description"></p>
-            </div>
             <div id="forecast" class="forecast"></div>
         </div>
     </div>
