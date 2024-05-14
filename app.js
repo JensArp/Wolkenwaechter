@@ -14,13 +14,13 @@ async function getWeather() {
 
         displayWeather(currentWeather, forecast);
     } catch (error) {
-        alert('City not found');
+        alert('Stadt nicht gefunden!');
     }
 }
 
 function displayWeather(currentWeather, forecast) {
     document.getElementById('city-name').textContent = currentWeather.name;
-    document.getElementById('temperature').textContent = `Temperature: ${currentWeather.main.temp}°C`;
+    document.getElementById('temperature').textContent = `Temperatur: ${currentWeather.main.temp}°C`;
     document.getElementById('description').textContent = currentWeather.weather[0].description;
 
     const forecastElement = document.getElementById('forecast');
