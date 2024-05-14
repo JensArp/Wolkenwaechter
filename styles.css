@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    background: white;
+    background: rgba(255, 255, 255, 0.8); /* Transparenter Hintergrund */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -68,7 +68,7 @@ button:hover {
 }
 
 .forecast-day {
-    background: #f9f9f9;
+    background: rgba(249, 249, 249, 0.8); /* Transparenter Hintergrund */
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
