@@ -37,10 +37,14 @@ async function getWeather() {
 
         // Display current weather
         const weatherIcon = getWeatherIcon(currentWeatherData.weather[0].icon);
-        currentWeatherIcon.src = `icons/${weatherIcon}`;
+        currentWeatherIcon.src = `images/${weatherIcon}`;
         currentTemperature.textContent = `${Math.round(currentWeatherData.main.temp)}°C`;
         currentLocation.textContent = currentWeatherData.name;
         currentWeather.style.display = 'block';
+
+        // Change background based on current weather
+        const weatherCondition = currentWeatherData.weather[0].main.toLowerCase();
+        changeBackground(weatherCondition);
     } catch (error) {
         alert('Stadt nicht gefunden!');
     }
@@ -57,10 +61,14 @@ function displayWeather(currentWeather, forecast) {
 
         const weatherIcon = getWeatherIcon(dayForecast.weather[0].icon);
 
+        // Get weekday abbreviation
+        const date = new Date(dayForecast.dt_txt);
+        const weekday = date.toLocaleDateString('de-DE', { weekday: 'short' });
+
         dayElement.innerHTML = `
-            <p>${new Date(dayForecast.dt_txt).toLocaleDateString()}</p>
+            <p>${weekday}</p>
             <img src="images/${weatherIcon}" alt="${dayForecast.weather[0].description}">
-            <p>Temp: ${Math.round(dayForecast.main.temp)}°C</p>
+            <p>${Math.round(dayForecast.main.temp)}°C</p>
             <p>${dayForecast.weather[0].description}</p>
         `;
         forecastElement.appendChild(dayElement);
@@ -95,4 +103,9 @@ function getWeatherIcon(iconCode) {
         default:
             return 'default.png'; // Optional: Fallback icon
     }
+}
+
+function changeBackground(weatherCondition) {
+    const body = document.body;
+    body.style.backgroundImage = `url('backgrounds/${weatherCondition}.jpg')`;
 }

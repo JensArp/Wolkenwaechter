@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #3a3ab3c6;
+    background-size: cover;
+    background-color: #8585bad5;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,19 +10,19 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.3); /* Transparenter Hintergrund */
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.35); /* Transparenter Hintergrund */
+    border-radius: 22px;
+    box-shadow: 0 4px 6px rgba(36, 36, 36, 0.5);
     padding: 20px;
-    max-width: 500px;
+    max-width: 600px;
     width: 100%;
     text-align: center;
 }
 
 .title {
-    font-size: 2rem;
+    font-size: 2,5rem;
     color: transparent;
-    background: linear-gradient(90deg, #232121, #a0a4a0dc, #7e7e87, #514e51);
+    background: linear-gradient(90deg, #232121, #686a68, #7e7e87, #514e51);
     background-size: 400%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -49,16 +50,18 @@ body {
     border-radius: 50px;
     width: calc(100% - 60px);
     margin-right: 10px;
-    background: rgba(255, 255, 255, 0.3); /* Transparenter Hintergrund */
+    background: rgba(255, 255, 255, 0.35); /* Transparenter Hintergrund */
     outline: none;
 }
 
 #search-button {
-    background: #ccccccb6; */
+    background: #ccccccb6; 
+    border: 0px;
     border-radius: 50%;
     padding: 10px;
     cursor: pointer;
     display: flex;
+    background: rgba(255, 255, 255, 0.35);
     justify-content: center;
     align-items: center;
 }
@@ -75,18 +78,20 @@ body {
 }
 
 .current-weather img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 .current-temperature {
-    font-size: 2rem;
-    margin: 5px 0;
+    font-size: 3rem;
+    font-weight: bold; /* Schriftdicke geändert */
+    margin: 10px 0;
 }
 
 .current-location {
-    font-size: 1.5rem;
-    margin: 5px 0;
+    font-size: 2rem;
+    font-weight: bold; /* Schriftdicke geändert */
+    margin: 10px 0;
 }
 
 .weather-info {
@@ -102,10 +107,10 @@ body {
 
 .forecast-day {
     background: rgba(249, 249, 249, 0.35); /* Transparenter Hintergrund */
-    border-radius: 5px;
+    border-radius: 7px;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 0 0 15%; /* Feste Breite für die Tagesblöcke */
+    box-shadow: 0 2px 4px rgba(55, 55, 55, 0.27);
+    flex: 5 5 15%; /* Feste Breite für die Tagesblöcke */
     margin: 5px;
     box-sizing: border-box;
     text-align: center;
