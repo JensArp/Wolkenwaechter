@@ -1,6 +1,6 @@
 # locker_mit_docker
-# Linux, AWS, Slack, Jira, Docker
-# Buzted Repo kopiert
+# Wetter App aufbau
+# Wetter Api konfiguriert
 # senol branch hinzugefügt
 # janni branch hinzugefügt
 # sebo/dev branch hinzugefügt
