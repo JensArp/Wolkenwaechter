@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.35); /* Transparenter Hintergrund */
+    background: rgba(255, 255, 255, 0.45); /* Transparenter Hintergrund */
     border-radius: 22px;
     box-shadow: 0 4px 6px rgba(36, 36, 36, 0.5);
     padding: 20px;
