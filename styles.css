@@ -6,14 +6,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     margin: 0;
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.45); /* Transparenter Hintergrund */
+    background: rgba(255, 255, 255, 0.4); /* Transparenter Hintergrund */
     border-radius: 22px;
-    box-shadow: 0 4px 6px rgba(36, 36, 36, 0.5);
+    box-shadow: 0 6px 8px rgba(36, 36, 36, 0.8);
     padding: 20px;
     max-width: 600px;
     width: 100%;
@@ -21,27 +22,22 @@ body {
 }
 
 .title {
-    font-size: 2,5rem;
-    color: transparent;
-    background: linear-gradient(90deg, #232121, #686a68, #7e7e87, #514e51);
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0 8px 8px rgba(0, 0, 0, 0.75);
     background-size: 400%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: gradient 15s ease infinite;
     margin-bottom: 20px;
+    transition: transform 1s ease;
 }
 
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.title:hover {
+    transform: scale(1.25);
 }
 
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 #city-input {
@@ -51,8 +47,9 @@ body {
     border-radius: 50px;
     width: calc(100% - 60px);
     margin-right: 10px;
-    background: rgba(255, 255, 255, 0.35); /* Transparenter Hintergrund */
+    background: rgba(255, 255, 255, 0.25); /* Transparenter Hintergrund */
     outline: none;
+    box-shadow: 0 4px 6px rgba(55, 55, 55, 0.6);
 }
 
 #search-button {
@@ -65,11 +62,17 @@ body {
     background: rgba(255, 255, 255, 0.35);
     justify-content: center;
     align-items: center;
+    transition: transform 0.4s ease;
+    box-shadow: 0 4px 6px rgba(55, 55, 55, 0.6);
 }
 
 #search-button img {
     width: 20px;
     height: 20px;
+}
+
+#search-button:hover {
+    transform: scale(1.25);
 }
 
 .current-weather {
@@ -110,11 +113,16 @@ body {
     background: rgba(249, 249, 249, 0.35); /* Transparenter Hintergrund */
     border-radius: 7px;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(55, 55, 55, 0.27);
+    box-shadow: 0 4px 6px rgba(55, 55, 55, 0.6);
     flex: 5 5 15%; /* Feste Breite für die Tagesblöcke */
     margin: 5px;
     box-sizing: border-box;
     text-align: center;
+    transition: transform 0.4s ease;
+}
+
+.forecast-day:hover {
+    transform: scale(1.05);
 }
 
 .forecast-day img {
