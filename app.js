@@ -109,5 +109,39 @@ function getWeatherIcon(iconCode) {
 
 function changeBackground(weatherCondition) {
     const body = document.body;
-    body.style.backgroundImage = `url('backgrounds/${weatherCondition}.jpg')`;
+    let backgroundFilename = '';
+
+    switch(weatherCondition) {
+        case 'clear':
+            backgroundFilename = 'clear.jpg';
+            break;
+        case 'clouds':
+            backgroundFilename = 'cloudy.jpg';
+            break;
+        case 'rain':
+            backgroundFilename = 'rain.jpg';
+            break;
+        case 'thunderstorm':
+            backgroundFilename = 'thunderstorm.jpg';
+            break;
+        case 'snow':
+            backgroundFilename = 'snow.jpg';
+            break;
+        case 'mist':
+        case 'smoke':
+        case 'haze':
+        case 'dust':
+        case 'fog':
+        case 'sand':
+        case 'ash':
+        case 'squall':
+        case 'tornado':
+            backgroundFilename = 'fog.jpg';
+            break;
+        default:
+            backgroundFilename = 'default.jpg';
+            break;
+    }
+
+    body.style.backgroundImage = `url('backgrounds/${backgroundFilename}')`;
 }
