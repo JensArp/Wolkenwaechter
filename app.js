@@ -1,17 +1,17 @@
-const apiKey = 'cbbc4708df34fee8dbcc2e5accb3caf0'; // Replace with your OpenWeatherMap API key
+const apiKey = 'cbbc4708df34fee8dbcc2e5accb3caf0'; // Ersetze durch deinen OpenWeatherMap API-Key
 
 document.addEventListener('DOMContentLoaded', () => {
     const cityInput = document.getElementById('city-input');
     const searchButton = document.getElementById('search-button');
     
-    // Add event listener for 'Enter' key
+    // Event Listener für die 'Enter'-Taste
     cityInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             getWeather();
         }
     });
 
-    // Add event listener for search button
+    // Event Listener für den Such-Button
     searchButton.addEventListener('click', getWeather);
 });
 
@@ -35,14 +35,14 @@ async function getWeather() {
 
         displayWeather(currentWeatherData, forecastData);
 
-        // Display current weather
+        // Anzeige des aktuellen Wetters
         const weatherIcon = getWeatherIcon(currentWeatherData.weather[0].icon);
         currentWeatherIcon.src = `images/${weatherIcon}`;
         currentTemperature.textContent = `${Math.round(currentWeatherData.main.temp)}°C`;
         currentLocation.textContent = currentWeatherData.name;
         currentWeather.style.display = 'block';
 
-        // Change background based on current weather
+        // Hintergrund ändern basierend auf dem aktuellen Wetter
         const weatherCondition = currentWeatherData.weather[0].main.toLowerCase();
         changeBackground(weatherCondition);
     } catch (error) {
@@ -61,12 +61,14 @@ function displayWeather(currentWeather, forecast) {
 
         const weatherIcon = getWeatherIcon(dayForecast.weather[0].icon);
 
-        // Get weekday abbreviation
         const date = new Date(dayForecast.dt_txt);
         const weekday = date.toLocaleDateString('de-DE', { weekday: 'short' });
+        const day = date.getDate();
+        const month = date.getMonth() + 1; // Monate beginnen bei 0
 
         dayElement.innerHTML = `
             <p>${weekday}</p>
+            <p>${day}.${month < 10 ? '0' : ''}${month}</p>
             <img src="images/${weatherIcon}" alt="${dayForecast.weather[0].description}">
             <p>${Math.round(dayForecast.main.temp)}°C</p>
             <p>${dayForecast.weather[0].description}</p>
@@ -101,7 +103,7 @@ function getWeatherIcon(iconCode) {
         case '13n':
             return 'snow.png';
         default:
-            return 'default.png'; // Optional: Fallback icon
+            return 'default.png'; // Optional: Fallback-Icon
     }
 }
 
