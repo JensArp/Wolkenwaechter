@@ -23,7 +23,7 @@ async function updateCityList(event) {
     const query = event.target.value;
     if (query.length < 3) return; // Beginne mit der Suche erst ab 3 Zeichen
 
-    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxApiKey}&autocomplete=true&types=place`);
+    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxApiKey}&autocomplete=true&types=place&language=de`);
     const cityData = await response.json();
     
     const cityList = document.getElementById('city-list');
