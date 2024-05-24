@@ -1,4 +1,5 @@
-const apiKey = 'cbbc4708df34fee8dbcc2e5accb3caf0'; // Ersetze durch deinen OpenWeatherMap API-Key
+const openWeatherApiKey = 'cbbc4708df34fee8dbcc2e5accb3caf0'; // Dein OpenWeatherMap API-Key
+const mapboxApiKey = 'pk.eyJ1Ijoic2ViYTk0IiwiYSI6ImNsd2w2aXc2NjAxeWgybXJ6MDhrc3YydjMifQ.6fpQEUu3r6uIjUcPtJ7rUA'; // Dein Mapbox API-Key
 
 document.addEventListener('DOMContentLoaded', () => {
     const cityInput = document.getElementById('city-input');
@@ -13,7 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listener für den Such-Button
     searchButton.addEventListener('click', getWeather);
+
+    // Event Listener für die Eingabe im Suchfeld
+    cityInput.addEventListener('input', updateCityList);
 });
+
+async function updateCityList(event) {
+    const query = event.target.value;
+    if (query.length < 3) return; // Beginne mit der Suche erst ab 3 Zeichen
+
+    const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?access_token=${mapboxApiKey}&autocomplete=true&types=place`);
+    const cityData = await response.json();
+    
+    const cityList = document.getElementById('city-list');
+    cityList.innerHTML = ''; // Alte Einträge entfernen
+    
+    cityData.features.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city.place_name;
+        cityList.appendChild(option);
+    });
+}
 
 async function getWeather() {
     const city = document.getElementById('city-input').value;
@@ -27,10 +48,10 @@ async function getWeather() {
     currentWeather.style.display = 'none';
 
     try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}&lang=de`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${openWeatherApiKey}&lang=de`);
         const currentWeatherData = await response.json();
 
-        const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}&lang=de`);
+        const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${openWeatherApiKey}&lang=de`);
         const forecastData = await forecastResponse.json();
 
         displayWeather(currentWeatherData, forecastData);

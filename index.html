@@ -11,14 +11,14 @@
     <h1 class="title">Wolkenwächter</h1>
     <div class="container">
         <div class="search-container">
-            <input type="text" id="city-input" placeholder="Ort eintragen">
+            <input type="text" id="city-input" list="city-list" placeholder="Ort eintragen">
+            <datalist id="city-list"></datalist>
             <button id="search-button"><img src="icons/search-icon.png" alt="Search"></button>
         </div>
         <div id="current-weather" class="current-weather">
             <img id="current-weather-icon" src="" alt="Weather Icon">
             <p id="current-temperature" class="current-temperature"></p>
             <p id="current-location" class="current-location"></p>
-
         </div>
         <div id="weather-info" class="weather-info">
             <div id="forecast" class="forecast"></div>
