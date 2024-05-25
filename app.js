@@ -9,11 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
     cityInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             getWeather();
+            closeDatalist(); // Schließt das Datalist-Menü bei Enter
         }
     });
 
     // Event Listener für den Such-Button
-    searchButton.addEventListener('click', getWeather);
+    searchButton.addEventListener('click', () => {
+        getWeather();
+        closeDatalist(); // Schließt das Datalist-Menü bei Klick auf die Suchschaltfläche
+    });
 
     // Event Listener für die Eingabe im Suchfeld
     cityInput.addEventListener('input', updateCityList);
@@ -71,6 +75,12 @@ async function getWeather() {
     }
 }
 
+function closeDatalist() {
+    const cityInput = document.getElementById('city-input');
+    cityInput.blur(); // Entferne den Fokus vom Eingabefeld, um das Datalist-Menü zu schließen
+    setTimeout(() => cityInput.focus(), 0); // Setze den Fokus nach einem kurzen Timeout zurück auf das Eingabefeld
+}
+
 function displayWeather(currentWeather, forecast) {
     const forecastElement = document.getElementById('forecast');
     forecastElement.innerHTML = '';
@@ -87,13 +97,21 @@ function displayWeather(currentWeather, forecast) {
         const day = date.getDate();
         const month = date.getMonth() + 1; // Monate beginnen bei 0
 
-        dayElement.innerHTML = `
-            <p>${weekday}</p>
-            <p>${day}.${month < 10 ? '0' : ''}${month}</p>
-            <img src="images/${weatherIcon}" alt="${dayForecast.weather[0].description}">
-            <p>${Math.round(dayForecast.main.temp)}°C</p>
-            <p>${dayForecast.weather[0].description}</p>
-        `;
+        const template = document.getElementById('forecast-template').content.cloneNode(true);
+        
+        template.querySelector('.weekday').textContent = weekday;
+        template.querySelector('.date').textContent = `${day}.${month < 10 ? '0' : ''}${month}`;
+        template.querySelector('.weather-icon').src = `images/${weatherIcon}`;
+        template.querySelector('.weather-icon').alt = dayForecast.weather[0].description;
+        template.querySelector('.temperature').textContent = `${Math.round(dayForecast.main.temp)}°C`;
+        template.querySelector('.description').textContent = dayForecast.weather[0].description;
+        template.querySelector('.rain').textContent = `Regen: ${Math.round(dayForecast.pop * 100)}%`;
+        template.querySelector('.wind').textContent = `Wind: ${Math.round(dayForecast.wind.speed * 3.6)} km/h`;
+        template.querySelector('.humidity').textContent = `LF: ${dayForecast.main.humidity}%`;
+        template.querySelector('.visibility').textContent = `Sicht: ${dayForecast.visibility / 1000} km`;
+        template.querySelector('.feels-like').textContent = `Gefühlt: ${Math.round(dayForecast.main.feels_like)}°C`;
+
+        dayElement.appendChild(template);
         forecastElement.appendChild(dayElement);
     }
 
