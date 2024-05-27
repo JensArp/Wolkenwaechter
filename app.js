@@ -108,7 +108,7 @@ function displayWeather(currentWeather, forecast) {
         template.querySelector('.rain').textContent = `Regen: ${Math.round(dayForecast.pop * 100)}%`;
         template.querySelector('.wind').textContent = `Wind: ${Math.round(dayForecast.wind.speed * 3.6)} km/h`;
         template.querySelector('.humidity').textContent = `LF: ${dayForecast.main.humidity}%`;
-        template.querySelector('.visibility').textContent = `Sicht: ${dayForecast.visibility / 1000} km`;
+        template.querySelector('.visibility').textContent = `Sicht: ${Math.round(dayForecast.visibility / 1000)} km`;
         template.querySelector('.feels-like').textContent = `Gefühlt: ${Math.round(dayForecast.main.feels_like)}°C`;
 
         dayElement.appendChild(template);
